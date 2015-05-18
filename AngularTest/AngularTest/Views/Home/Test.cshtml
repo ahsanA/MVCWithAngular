@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Test";
+}
+
+<div ng-app="myApp">
+    <div ng-controller="myController">
+
+        <h2>{{universityName}} Student Details</h2>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in items | orderBy:'Name'">
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", []);
+        var information = {
+            Name: "United International University",
+            items: []
+        };
+        myApp.run(function ($http) {
+            $http.get('@Url.Action("GetAllStudent","Home")').success(function (data) {
+                angular.forEach(data, function (event, key) {
+                    console.log(event.Name);
+                    information.items.push({ Name: event.Name, Status: event.Status });
+                })
+            });
+        });
+        myApp.controller("myController", function ($scope) {
+            $scope.universityName = information.Name
+            $scope.items = information.items;
+        });
+    </script>
+}
+

@@ -22,6 +22,14 @@
 		};		
 	});
 	
+	app.controller('ReviewController',function(){
+		this.review = {};
+		this.addReview = function(product){
+			product.reviews.push(this.review);
+			this.review = {};
+		};
+	});
+	
 	var gems = [
 		{
 			name: 'Dodecahedron',
@@ -37,6 +45,18 @@
 				{
 					full:'blue-gem.png',
 					thumb:'blue-gem-thumb.png'
+				}
+			],
+			reviews:[
+				{
+					stars:5,
+					body: "good",
+					author:"ahsan"
+				},
+				{
+					stars:4,
+					body: "so so",
+					author:"me"
 				}
 			]
 		},
@@ -54,6 +74,18 @@
 				{
 					full:'green-gem.png',
 					thumb:'green-gem-thumb.png'
+				}
+			],
+			reviews:[
+				{
+					stars:5,
+					body: "good",
+					author:"ahsan"
+				},
+				{
+					stars:4,
+					body: "so so",
+					author:"me"
 				}
 			]
 		}

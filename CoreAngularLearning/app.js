@@ -12,15 +12,15 @@
 		};
 	});
 	
-	app.controller('PanelController',function(){
-		this.tab = 1;
-		this.selectTab = function(setTab){
-			this.tab = setTab;
-		};
-		this.isSelected = function(checkTab){
-			return this.tab === checkTab;
-		};		
-	});
+	// app.controller('PanelController',function(){
+		// this.tab = 1;
+		// this.selectTab = function(setTab){
+			// this.tab = setTab;
+		// };
+		// this.isSelected = function(checkTab){
+			// return this.tab === checkTab;
+		// };		
+	// });
 	
 	app.controller('ReviewController',function(){
 		this.review = {};
@@ -28,6 +28,44 @@
 			product.reviews.push(this.review);
 			this.review = {};
 		};
+	});
+	
+	app.directive('productTitle',function(){
+		return{
+			restrict:'E',
+			templateUrl:'product-title.html'
+		};		
+	});
+	
+	app.directive('productDescription',function(){
+		return{
+			restrict:'E',
+			templateUrl:'product-description.html'
+		};		
+	});
+	
+	app.directive('productPanel',function(){
+		return{
+			restrict:'E',
+			templateUrl:'product-panel.html',
+			controller:function(){
+				this.tab = 1;
+				this.selectTab = function(setTab){
+					this.tab = setTab;
+				};
+				this.isSelected = function(checkTab){
+					return this.tab === checkTab;
+				};	
+			},
+			controllerAs:'panel'
+		};		
+	});
+	
+	app.directive('productReview',function(){
+		return{
+			restrict:'A',
+			templateUrl:'product-review.html'
+		};		
 	});
 	
 	var gems = [
